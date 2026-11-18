@@ -1,0 +1,25 @@
+# RTMP ingest from the PS5 only: every other protocol is off.
+
+# At info level the log shows the stream path, which contains the Twitch stream key.
+logLevel: warn
+
+rtmp: true
+rtmpAddress: :1935
+rtsp: false
+hls: false
+webrtc: false
+srt: false
+moq: false
+
+paths:
+  all_others:
+    # The window title is set explicitly: by default mpv shows the URL, stream key included.
+    # Playback controls are off so the stream cannot be paused or seeked by accident:
+    # only the bindings in mpv-input.conf work.
+    # Video lags by the size of the audio buffer: 0.05 gives ~45 ms, at 0 audio starts to drop out.
+    runOnAvailable: >-
+      mpv --profile=low-latency --audio-buffer=0.05 --msg-level=all=error
+      --title=PS5 --force-media-title=PS5
+      --no-osc --no-osd-bar --no-input-default-bindings --input-media-keys=no
+      --input-conf=mpv-input.conf rtmp://127.0.0.1:1935/$MTX_PATH
+    runOnAvailableRestart: true

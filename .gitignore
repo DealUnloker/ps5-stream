@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Editors
+.idea/
+.vscode/
+*.swp
+
+# Logs and recordings of the stream
+*.log
+*.flv
+*.mp4
+*.mkv
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Certificates and keys, including the pair MediaMTX generates for encrypted listeners
+auto.key
+auto.crt
+*.pem
+*.key
+*.crt
+
+# Homebrew
+Brewfile.lock.json
