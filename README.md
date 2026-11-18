@@ -76,7 +76,7 @@ The Mac's address can change when it reconnects to the network. If the PS5 repor
 
 4. When you are done: stop the broadcast on the PS5, then press Ctrl+C in the terminal. Switch the PS5's DNS Settings back to Automatic, or the console stays offline.
 
-The player is locked on purpose so a stray key cannot break the stream: pause, seeking and media keys are disabled. Only `f` or a double click (fullscreen) and `Esc` (leave fullscreen) work. If you close the window or the player crashes, it reopens within a few seconds.
+The player is locked on purpose so a stray key cannot break the stream: pause, seeking and media keys are disabled. Only these work: `f` or a double click (fullscreen), `Esc` (leave fullscreen), `↑` / `↓` (volume) and `m` (mute). If you close the window or the player crashes, it reopens within a few seconds.
 
 Broadcast resolution and voice chat audio are PS5 settings: Settings → Captures and Broadcasts → Broadcasts.
 
