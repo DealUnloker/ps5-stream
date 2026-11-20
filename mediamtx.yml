@@ -17,9 +17,10 @@ paths:
     # Playback controls are off so the stream cannot be paused or seeked by accident:
     # only the bindings in mpv-input.conf work.
     # Video lags by the size of the audio buffer: 0.05 gives ~45 ms, at 0 audio starts to drop out.
+    # mpv-catchup.lua returns the player to the live edge after a stall.
     runOnAvailable: >-
       mpv --profile=low-latency --audio-buffer=0.05 --msg-level=all=error
       --title=PS5 --force-media-title=PS5
       --no-osc --no-osd-bar --no-input-default-bindings --input-media-keys=no
-      --input-conf=mpv-input.conf rtmp://127.0.0.1:1935/$MTX_PATH
+      --input-conf=mpv-input.conf --script=mpv-catchup.lua rtmp://127.0.0.1:1935/$MTX_PATH
     runOnAvailableRestart: true

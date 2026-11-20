@@ -104,6 +104,8 @@ So: use a wired or USB audio device on the Mac. Bluetooth adds about half a seco
 
 These numbers cover the Mac side only. The PS5's own encoding delay, drawing the window (1–3 frames) and, if you share the window, the delay of the app you share it through come on top.
 
+The player also returns to the live edge by itself. When playback stalls (a display reconnects, the network hiccups), the stream keeps arriving, and a plain player would stay that far behind until the end of the broadcast. Here it plays the backlog at up to 2× speed until it is gone: a 5-second stall is caught up in about 5 seconds.
+
 ## Configuration
 
 Environment variables for `start.sh`:
@@ -120,6 +122,7 @@ Files:
 | [start.sh](start.sh) | `INGEST_DOMAINS`: the Twitch ingest domains answered with the Mac's address |
 | [mediamtx.yml](mediamtx.yml) | The player command line, including `--audio-buffer` |
 | [mpv-input.conf](mpv-input.conf) | The only key bindings active in the player window |
+| [mpv-catchup.lua](mpv-catchup.lua) | When and how fast the player catches up after a stall |
 
 Stop the broadcast before editing `mediamtx.yml`: MediaMTX reloads the file when it changes, which can drop a running stream.
 
@@ -133,7 +136,7 @@ Stop the broadcast before editing `mediamtx.yml`: MediaMTX reloads the file when
 
 - **No window opens, Twitch is offline, and the PS5 reports a broadcast error.** The console reached the Mac but not with plain RTMP on port 1935. Run with `PS5_STREAM_DEBUG=1` and check whether MediaMTX logs a connection.
 
-- **The window lags noticeably behind the TV.** See [Latency](#latency): switch the Mac's audio output away from Bluetooth.
+- **The window lags noticeably behind the TV.** See [Latency](#latency): switch the Mac's audio output away from Bluetooth. A delay that appears after a stall goes away by itself within a few seconds.
 
 - **Audio crackles or drops out.** Raise `--audio-buffer` in `mediamtx.yml` to `0.1`. The video delay grows by the same amount.
 
